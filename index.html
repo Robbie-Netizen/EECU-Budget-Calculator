@@ -1,130 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>EECU Budget Calculator</title>
-        <script type="module" src="./script.js"></script>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <header>
-            <nav>
-                <img src="/images/logo 1.png" alt="EECU logo" />
-                <a href="">Savings &amp; Checking</a
-                ><a href="">Loans &amp; Credit Cards</a
-                ><a href="">Online &amp; Mobile</a
-                ><a href="">News &amp; Resources</a><a href="">Money 101</a
-                ><a href="">Insure &amp; Invest</a>
-            </nav>
-            <h1>Budget Calculator</h1>
-        </header>
-        <main>
-            <section class="inputs">
-                <div class="progress">
-                    <!--when each page is progressed through, the numbers below must be individually incremented, so that the current page number reflects the first number-->
-                    <span class="visible-page-1">1</span>
-                    <div class="line-1"></div>
-                    <span class="visible-page-2">2</span>
-                    <div class="line-2"></div>
-                    <span class="visible-page-3">3</span>
-                    <div class="line-3"></div>
-                    <span class="visible-page-4">4</span>
-                    <div class="line-4"></div>
-                    <span class="visible-page-5">5</span>
-                </div>
-                <div class="current-page">
-                    <!--the templates below can be appended in here via `template.content.cloneNode(true)` in JS-->
-                </div>
-                <div class="navigation">
-                    <button class="back">Back</button
-                    ><button class="next">Next</button>
-                </div>
-                <template class="salary-page">
-                    <h3>Salary:</h3>
-                    <!--no JS needed to open the dialog here-->
-                    <button class="search-btn" command="show-modal" commandfor="search-dialog">
-                        Search <img src="../images/search.png" alt="Search icon">
-                    </button>
-                    <!--based on the chosen value of the <select> below, we must update this span to reflect the estimated income value-->
-                    <span class="income">Gross Income</span>
-                    <!--modal to use for searching, could potentially be simplified to a dropdown?-->
-                    <dialog closedby="any" id="search-dialog">
-                        <select name="jobs" id="job-selector">
-                            <option value="web developer">Web Developer</option>
-                            <option value="ethan pua">Ethan Pua</option>
-                        </select>
-                    </dialog>
-                </template>
-                <template class="student-loan-page">
-                    <h3>Student Loan:</h3>
-                    <button class="search-btn" command="show-modal" commandfor="search-dialog">
-                        Search <img src="../images/search.png" alt="Search icon">
-                    </button>
-                    <span class="student-loans-cost"></span>
-                    <dialog closedby="any" id="search-dialog">
-                        <select name="schools" id="school-selector">
-                            <option value="tech school">Tech School</option>
-                        </select>
-                    </dialog>
-                </template>
-                <template class="housing-page">
-                    <h3>Housing:</h3>
-                    <button class="search-btn" command="show-modal" commandfor="search-dialog">
-                        Search <img src="../images/search.png" alt="Search icon">
-                    </button>
-                    <span class="housing-cost"></span>
-                    <dialog closedby="any" id="search-dialog">
-                        <select name="homes" id="home-selector">
-                            <option value="cozy home">Cozy Home</option>
-                        </select>
-                    </dialog>
-                </template>
-                <template class="essentials-page">
-                    <h3>Essentials:</h3>
-                    <button class="search-btn" command="show-modal" commandfor="search-dialog">
-                        Search <img src="../images/search.png" alt="Search icon">
-                    </button>
-                    <span class="essentials-cost"></span>
-                    <dialog closedby="any" id="search-dialog">
-                        <select name="essentials" id="essentials-selector">
-                            <option value="monthly stuff">Monthly Stuff</option>
-                        </select>
-                    </dialog>
-                </template>
-                <template class="lifestyle-page">
-                    <h3>Lifestyle:</h3>
-                    <button class="search-btn" command="show-modal" commandfor="search-dialog">
-                        Search <img src="../images/search.png" alt="Search icon">
-                    </button>
-                    <span class="lifestyle-cost"></span>
-                    <dialog closedby="any" id="search-dialog">
-                        <select name="lifestyles" id="lifestyle-selector">
-                            <option value="hobby">Hobby</option>
-                        </select>
-                    </dialog>
-                </template>
-                <template class="future-proofing-page">
-                    <h3>Future-Proofing:</h3>
-                    <button class="search-btn" command="show-modal" commandfor="search-dialog">
-                        Search <img src="../images/search.png" alt="Search icon">
-                    </button>
-                    <span class="future-proofing-cost"></span>
-                    <dialog closedby="any" id="search-dialog">
-                        <select
-                            name="future-proofing"
-                            id="future-proofing-selector"
-                        >
-                            <option value="retirement fund">
-                                Retirement Fund
-                            </option>
-                        </select>
-                    </dialog>
-                </template>
-            </section>
-            <section class="output">
-                <h3>Monthly Budget</h3>
-                <div class="graph"></div>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EECU Budget Calculator</title>
+    <script type="module" src="./script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <img src="/images/logo 1.png" alt="EECU logo" />
+            <a href="">Savings &amp; Checking</a><a href="">Loans &amp; Credit Cards</a><a href="">Online &amp;
+                Mobile</a><a href="">News &amp; Resources</a><a href="">Money 101</a><a href="">Insure &amp; Invest</a>
+        </nav>
+        <h1>Budget Calculator</h1>
+    </header>
+    <main>
+        <section class="inputs">
+            <div class="progress">
+                <!--when each page is progressed through, the numbers below must be individually incremented, so that the current page number reflects the first number-->
+                <span class="visible-page-1">1</span>
+                <div class="line-1"></div>
+                <span class="visible-page-2">2</span>
+                <div class="line-2"></div>
+                <span class="visible-page-3">3</span>
+                <div class="line-3"></div>
+                <span class="visible-page-4">4</span>
+                <div class="line-4"></div>
+                <span class="visible-page-5">5</span>
+            </div>
+            <div class="current-page">
+                <!--the templates below can be appended in here via `template.content.cloneNode(true)` in JS-->
+            </div>
+            <div class="navigation">
+                <button class="back">Back</button><button class="next">Next</button>
+            </div>
+            <template class="salary-page">
+                <h3>Salary:</h3>
+                <!--no JS needed to open the dialog here-->
+                <button class="search-btn" command="show-modal" commandfor="search-dialog">
+                    Search <img src="../images/search.png" alt="Search icon">
+                </button>
+                <!--based on the chosen value of the <select> below, we must update this span to reflect the estimated income value-->
+                <span class="income">Gross Income</span>
+                <!--modal to use for searching, could potentially be simplified to a dropdown?-->
+                <dialog closedby="any" id="search-dialog">
+                    <select name="jobs" id="job-selector">
+                        <option value="web developer">Web Developer</option>
+                        <option value="ethan pua">Ethan Pua</option>
+                    </select>
+                </dialog>
+            </template>
+            <template class="student-loan-page">
+                <h3>Student Loan:</h3>
+                <button class="search-btn" command="show-modal" commandfor="search-dialog">
+                    Search <img src="../images/search.png" alt="Search icon">
+                </button>
+                <span class="student-loans-cost"></span>
+                <dialog closedby="any" id="search-dialog">
+                    <select name="schools" id="school-selector">
+                        <option value="tech school">Tech School</option>
+                    </select>
+                </dialog>
+            </template>
+            <template class="housing-page">
+                <h3>Housing:</h3>
+                <button class="search-btn" command="show-modal" commandfor="search-dialog">
+                    Search <img src="../images/search.png" alt="Search icon">
+                </button>
+                <span class="housing-cost"></span>
+                <dialog closedby="any" id="search-dialog">
+                    <select name="homes" id="home-selector">
+                        <option value="cozy home">Cozy Home</option>
+                    </select>
+                </dialog>
+            </template>
+            <template class="essentials-page">
+                <h3>Essentials:</h3>
+                <button class="search-btn" command="show-modal" commandfor="search-dialog">
+                    Search <img src="../images/search.png" alt="Search icon">
+                </button>
+                <span class="essentials-cost"></span>
+                <dialog closedby="any" id="search-dialog">
+                    <select name="essentials" id="essentials-selector">
+                        <option value="monthly stuff">Monthly Stuff</option>
+                    </select>
+                </dialog>
+            </template>
+            <template class="lifestyle-page">
+                <h3>Lifestyle:</h3>
+                <button class="search-btn" command="show-modal" commandfor="search-dialog">
+                    Search <img src="../images/search.png" alt="Search icon">
+                </button>
+                <span class="lifestyle-cost"></span>
+                <dialog closedby="any" id="search-dialog">
+                    <select name="lifestyles" id="lifestyle-selector">
+                        <option value="hobby">Hobby</option>
+                    </select>
+                </dialog>
+            </template>
+            <template class="future-proofing-page">
+                <h3>Future-Proofing:</h3>
+                <button class="search-btn" command="show-modal" commandfor="search-dialog">
+                    Search <img src="../images/search.png" alt="Search icon">
+                </button>
+                <span class="future-proofing-cost"></span>
+                <dialog closedby="any" id="search-dialog">
+                    <select name="future-proofing" id="future-proofing-selector">
+                        <option value="retirement fund">
+                            Retirement Fund
+                        </option>
+                    </select>
+                </dialog>
+            </template>
+        </section>
+        <section class="output">
+            <h3>Monthly Budget</h3>
+            <div class="graph"></div>
+            <section class="stats-section">
                 <div class="stats scrollable">
                     <ul>
                         <li id="net-income-bullet">
@@ -157,8 +153,11 @@
                         </li>
                     </ul>
                 </div>
-                <img src="../images/down-arrow.png" alt="More content below">
+                <img class="arrow" src="../images/down-arrow.png" alt="More content below">
             </section>
-        </main>
-    </body>
+
+        </section>
+    </main>
+</body>
+
 </html>
