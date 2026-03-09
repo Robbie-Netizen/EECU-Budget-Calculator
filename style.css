@@ -67,9 +67,15 @@ main {
 }
 
 .navigation {
+    align-self: center;
     justify-self: end;
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: center;
+    gap: 150%;
+    margin-top: auto;
+    margin-bottom: 25px;
+    
 }
 
 .inputs {
@@ -129,12 +135,12 @@ main {
         margin: 25px 0px 25px 50px;
     }
 
-    & .search-btn {
+    & [id$="selector"] {
         grid-area: search;
         background: #0054A4;
         color: white;
         display: flex;
-        width: 214px;
+        width: max-content;
         height: 50px;
         padding: 5px 37px;
         justify-content: center;
