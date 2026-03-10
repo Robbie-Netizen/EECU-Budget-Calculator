@@ -3,8 +3,14 @@ const page_view = /** @type {HTMLDivElement} */ (document.querySelector('.curren
 const visible_page_counters = /** @type {NodeListOf<HTMLSpanElement>} */ (document.querySelectorAll('[class^=visible-page]'));
 let current_page_number = 0;
 const templates = [...document.querySelectorAll('template')];
-const nextBtn = (document.querySelector('.next'));
-const backBtn = (document.querySelector('.back'));
+const nextBtn = document.querySelector('.next');
+const backBtn = document.querySelector('.back');
+const clone = document.importNode(templates[0], true);
+const job_selector = clone.querySelectorAll("#job-selector");
+
+console.log(clone);
+console.log(job_selector);
+
 
 function render_page() {
     const fragment = templates[current_page_number].content.cloneNode(true);
@@ -32,43 +38,37 @@ function back_page() {
 
 render_page();
 
-nextBtn.addEventListener('click', next_page);
-backBtn.addEventListener('click', back_page);
+if(nextBtn) nextBtn.addEventListener('click', next_page);
+if(backBtn) backBtn.addEventListener('click', back_page);
 
 import { fetchJson } from './utility.js';
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'USD'
 });
 
 async function init() {
-    const root = document.querySelector('#root');
     const url = 'https://eecu-data-server.vercel.app/data';
 
     try {
         const jobs = await fetchJson(url);
-        root.append(buildList(jobs));
+        if(clone) clone.append(buildList(jobs));
     } catch (err) {
-        root.style.color = 'red';
-        root.textContent = `Error: ${err.message}`;
+        if(clone) clone.textContent = `Error: ${err.message}`;
     }
 }
 
 function buildList(jobs = []) {
-    const frag = document.createDocumentFragment();
+    const frag = document.createElement('section');
     for (const { Occupation, Salary } of jobs) {
-      const section = document.createElement('section');
   
-      const occ = document.createElement('div');
-      occ.innerHTML = `<strong>Occupation</strong>: ${Occupation}`;
-      section.append(occ);
+      const occ = document.createElement('option');
+      occ.innerHTML = `<strong>Occupation</strong>: ${Occupation} <strong>Salary</strong>: ${formatter.format(Salary)}`;
+      
   
-      const sal = document.createElement('div');
-      sal.innerHTML = `<strong>Salary</strong>: ${formatter.format(Salary)}`;
-      section.append(sal);
-  
-      frag.append(section);
+      frag.append(occ);
+      console.log(frag);
     }
     return frag;
   }
