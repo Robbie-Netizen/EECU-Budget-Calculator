@@ -1,16 +1,19 @@
 // @ts-check
-const page_view = /** @type {HTMLDivElement} */ (document.querySelector('.current-page'));
-const visible_page_counters = /** @type {NodeListOf<HTMLSpanElement>} */ (document.querySelectorAll('[class^=visible-page]'));
+const page_view = /** @type {HTMLDivElement} */ (
+    document.querySelector('.current-page')
+);
+const visible_page_counters = /** @type {NodeListOf<HTMLSpanElement>} */ (
+    document.querySelectorAll('[class^=visible-page]')
+);
 let current_page_number = 0;
 const templates = [...document.querySelectorAll('template')];
 const nextBtn = document.querySelector('.next');
 const backBtn = document.querySelector('.back');
 const clone = document.importNode(templates[0], true);
-const job_selector = clone.querySelectorAll("#job-selector");
+const job_selector = clone.querySelectorAll('#job-selector');
 
 console.log(clone);
 console.log(job_selector);
-
 
 function render_page() {
     const fragment = templates[current_page_number].content.cloneNode(true);
@@ -35,12 +38,6 @@ function back_page() {
     current_page_number--;
     render_page();
 }
-
-render_page();
-
-if(nextBtn) nextBtn.addEventListener('click', next_page);
-if(backBtn) backBtn.addEventListener('click', back_page);
-
 import { fetchJson } from './utility.js';
 
 const formatter = new Intl.NumberFormat('en-US', {
@@ -53,26 +50,32 @@ async function init() {
 
     try {
         const jobs = await fetchJson(url);
-        if(clone) clone.append(buildList(jobs));
+        templates[0].content.querySelector('select')?.append(buildList(jobs));
     } catch (err) {
-        if(clone) clone.textContent = `Error: ${err.message}`;
+        if (clone) clone.textContent = `Error: ${/** @type {Error} */ (err).message}`;
     }
 }
 
+/**
+ * @param {any[]} [jobs]
+ */
 function buildList(jobs = []) {
     const frag = document.createElement('section');
     for (const { Occupation, Salary } of jobs) {
-  
-      const occ = document.createElement('option');
-      occ.innerHTML = `<strong>Occupation</strong>: ${Occupation} <strong>Salary</strong>: ${formatter.format(Salary)}`;
-      
-  
-      frag.append(occ);
-      console.log(frag);
+        const occ = document.createElement('option');
+        occ.innerHTML = `<strong>Occupation</strong>: ${Occupation} <strong>Salary</strong>: ${formatter.format(
+            Salary
+        )}`;
+
+        frag.append(occ);
+        console.log(frag);
     }
     return frag;
-  }
-  
-  document.addEventListener('DOMContentLoaded', init);
+}
 
-  const careerList = document.getElementById
+await init();
+
+render_page();
+
+if (nextBtn) nextBtn.addEventListener('click', next_page);
+if (backBtn) backBtn.addEventListener('click', back_page);
