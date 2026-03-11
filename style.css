@@ -97,8 +97,9 @@ main {
     margin-top: 25px;
 }
 
-[class^="visible-page"] {
+.sky-blue {
     background-color: #E8F3FC;
+    color: black;
     width: 70px;
     height: 70px;
     border-radius: 100px;
@@ -107,10 +108,17 @@ main {
     font-size: 36px;
 }
 
-.visible-page-1 {
+.blue {
     background-color: #0054A4;
     color: white;
+    width: 70px;
+    height: 70px;
+    border-radius: 100px;
+    text-align: center;
+    align-content: center;
+    font-size: 36px;
 }
+
 
 [class^="line"] {
     width: 75px;
@@ -120,6 +128,17 @@ main {
     align-self: center;
 }
 
+.full {
+    
+}
+
+.half {
+
+}
+
+.none {
+
+}
 
 .current-page {
     display: grid;
@@ -138,28 +157,19 @@ main {
     & [id$="selector"] {
         grid-area: search;
         background: #0054A4;
-        color: white;
-        display: flex;
-        width: max-content;
+        width: auto;
         height: 50px;
         padding: 5px 37px;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        flex-shrink: 0;
         color: #FFF;
-        text-align: center;
+        text-align: left;
         font-size: 24px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+        & option {
+            font-size: 16px;
+        }
     }
 
-    & span {
+    & label {
         grid-area: value;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
         gap: 10px;
         display: flex;
         width: 214px;
@@ -168,6 +178,7 @@ main {
         align-items: center;
         background: #E8F3FC;
         border: 2px solid #0054A4;
+        box-sizing: border-box;
         color: #000;
         font-size: 24px;
     }
@@ -299,7 +310,6 @@ main {
     color: var(--future-proofing);
 }
 
-
 .scrollable {
     width: 75%;
     height: 120px;
@@ -313,4 +323,8 @@ main {
 .scrollable::-webkit-scrollbar {
     display: none;
     width: 0px;
+}
+
+.job-options {
+    font-size: 20px;
 }

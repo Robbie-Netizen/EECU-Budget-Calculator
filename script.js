@@ -1,28 +1,26 @@
-// @ts-check
-const page_view = /** @type {HTMLDivElement} */ (
-    document.querySelector('.current-page')
-);
-const visible_page_counters = /** @type {NodeListOf<HTMLSpanElement>} */ (
-    document.querySelectorAll('[class^=visible-page]')
-);
+
+const page_view = document.querySelector('.current-page');
 let current_page_number = 0;
 const templates = [...document.querySelectorAll('template')];
-const nextBtn = document.querySelector('.next');
-const backBtn = document.querySelector('.back');
+const nextBtn = document.getElementsByClassName('next');
+const backBtn = document.getElementsByClassName('back');
 const clone = document.importNode(templates[0], true);
 const job_selector = clone.querySelectorAll('#job-selector');
+const grossIncome = document.getElementById('gross-income');
 
-console.log(clone);
-console.log(job_selector);
+const netIncome = document.getElementById('net-income');
+const taxes = document.getElementById('taxes');
+const studentLoans = document.getElementById('student-loans');
+const housing = document.getElementById('housing');
+const essentials = document.getElementById('essentials');
+const lifestyle = document.getElementById('lifestyle');
+const futureProofing = document.getElementById('future-proofing');
 
 function render_page() {
     const fragment = templates[current_page_number].content.cloneNode(true);
     page_view.replaceChildren(fragment);
 
     let number = current_page_number + 1;
-    for (const counter of visible_page_counters) {
-        counter.textContent = `${number++}`;
-    }
 }
 
 function next_page() {
@@ -63,12 +61,10 @@ function buildList(jobs = []) {
     const frag = document.createElement('section');
     for (const { Occupation, Salary } of jobs) {
         const occ = document.createElement('option');
-        occ.innerHTML = `<strong>Occupation</strong>: ${Occupation} <strong>Salary</strong>: ${formatter.format(
-            Salary
-        )}`;
+        occ.classList.add('job-options');
+        occ.innerHTML = Occupation;
 
         frag.append(occ);
-        console.log(frag);
     }
     return frag;
 }
@@ -77,5 +73,5 @@ await init();
 
 render_page();
 
-if (nextBtn) nextBtn.addEventListener('click', next_page);
-if (backBtn) backBtn.addEventListener('click', back_page);
+nextBtn[0].addEventListener('click', next_page);
+backBtn[0].addEventListener('click', back_page);

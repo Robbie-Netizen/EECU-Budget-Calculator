@@ -13,8 +13,12 @@
     <header>
         <nav>
             <img src="/images/logo 1.png" alt="EECU logo" />
-            <a href="">Savings &amp; Checking</a><a href="">Loans &amp; Credit Cards</a><a href="">Online &amp;
-                Mobile</a><a href="">News &amp; Resources</a><a href="">Money 101</a><a href="">Insure &amp; Invest</a>
+            <a href="">Savings &amp; Checking</a>
+            <a href="">Loans &amp; Credit Cards</a>
+            <a href="">Online &amp; Mobile</a>
+            <a href="">News &amp; Resources</a>
+            <a href="">Money 101</a>
+            <a href="">Insure &amp; Invest</a>
         </nav>
         <h1>Budget Calculator</h1>
     </header>
@@ -22,15 +26,17 @@
         <section class="inputs">
             <div class="progress">
                 <!--when each page is progressed through, the numbers below must be individually incremented, so that the current page number reflects the first number-->
-                <span class="visible-page-1">1</span>
-                <div class="line-1"></div>
-                <span class="visible-page-2">2</span>
-                <div class="line-2"></div>
-                <span class="visible-page-3">3</span>
-                <div class="line-3"></div>
-                <span class="visible-page-4">4</span>
-                <div class="line-4"></div>
-                <span class="visible-page-5">5</span>
+                <span class="visible-page-1 blue">1</span>
+                <div class="line-1 half"></div>
+                <span class="visible-page-2 sky-blue">2</span>
+                <div class="line-2 none"></div>
+                <span class="visible-page-3 sky-blue">3</span>
+                <div class="line-3 none"></div>
+                <span class="visible-page-4 sky-blue">4</span>
+                <div class="line-4 none"></div>
+                <span class="visible-page-5 sky-blue">5</span>
+                <div class="line-5 none"></div>
+                <span class="visible-page-6 sky-blue">6</span>
             </div>
             <div class="current-page">
                 <!--the templates below can be appended in here via `template.content.cloneNode(true)` in JS-->
@@ -39,15 +45,13 @@
                 <button class="back">Back</button>
                 <button class="next">Next</button>
             </div>
+
             <template class="salary-page">
-                <h3>Salary:</h3>
-                <!--no JS needed to open the dialog here-->
-                <select name="jobs" id="job-selector">
-                    <option value="select">Select Option</option>
+                <h3>Career:</h3>
+                <select name="jobs" id="job-selector" size="1">
+                    <option value="select" class="job-options">Select Option</option>
                 </select>
-                <!--based on the chosen value of the <select> below, we must update this span to reflect the estimated income value-->
-                <span class="income">Gross Income</span>
-                <!--modal to use for searching, could potentially be simplified to a dropdown?-->
+                <label for="gross-income">$<span id="gross-income">Gross Income</span></label>
             </template>
 
             <template class="student-loan-page">
@@ -56,6 +60,7 @@
                     <option value="tech school">Tech School</option>
                 </select>
                 <span class="student-loans-cost"></span>
+                <span id="student-loans-total"></span>
             </template>
 
             <template class="housing-page">
@@ -100,31 +105,31 @@
                     <ul>
                         <li id="net-income-bullet">
                             Net Income: <br />
-                            <span class="net-income">000.00</span>
+                            <span id="net-income">000.00</span>
                         </li>
                         <li id="taxes-bullet">
                             Taxes <br />
-                            <span class="taxes">000.00</span>
+                            <span id="taxes">000.00</span>
                         </li>
                         <li id="student-loans-bullet">
                             Student Loans <br />
-                            <span class="student-loans">000.00</span>
+                            <span id="student-loans">000.00</span>
                         </li>
                         <li id="housing-bullet">
                             Housing <br />
-                            <span class="housing">000.00</span>
+                            <span id="housing">000.00</span>
                         </li>
                         <li id="essentials-bullet">
                             Essentials <br />
-                            <span class="essentials">000.00</span>
+                            <span id="essentials">000.00</span>
                         </li>
                         <li id="lifestyle-bullet">
                             Lifestyle <br />
-                            <span class="lifestyle">000.00</span>
+                            <span id="lifestyle">000.00</span>
                         </li>
                         <li id="future-proofing-bullet">
                             Future-Proofing <br />
-                            <span class="future-proofing">000.00</span>
+                            <span id="future-proofing">000.00</span>
                         </li>
                     </ul>
                 </div>
